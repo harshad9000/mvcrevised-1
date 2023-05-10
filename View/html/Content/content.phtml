@@ -1,0 +1,11 @@
+<?php
+// echo "<pre>";
+// print_r($this->getChildren());
+// die();
+$children = $this->getChildren();
+foreach ($children as $key => $child) {
+	$child->render();	
+}
+
+
+?>

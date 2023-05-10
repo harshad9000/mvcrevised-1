@@ -1,0 +1,109 @@
+<?php
+$salesman = $this->salesman;
+$salesmanAddress = $this->salesmanAddress;
+?>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADD</title>
+</head>
+<body>
+
+	<?php require 'view/html/header.phtml'; ?>
+	<table class="table table-success table-striped-columns">
+		<tr>
+			<th>Salesman Edit</th>
+		</tr>
+	</table>
+	<form action="index.php?c=salesman&a=save&id=<?php echo $salesman->salesman_id ?>" method="POST">
+		<table class="table table-success table-striped-columns">
+			<tr>
+				<td>FIRST NAME</td>
+				<td> <input type="text" name="salesman[first_name]" value="<?php echo $salesman->first_name ?>">  </td>
+			</tr>
+			<tr>
+				<td>LAST NAME</td>
+				<td> <input type="text" name="salesman[last_name]" value="<?php echo $salesman->last_name ?>">  </td>
+			</tr>
+			<tr>
+				<td>EMAIL</td>
+				<td> <input type="text" name="salesman[email]" value="<?php echo $salesman->email ?>">  </td>
+			</tr>
+			<tr>
+				<td>GENDER</td>
+				<td>
+					<select name="salesman[gender]" value="<?php echo $salesman->gender ?>"> 
+						<option>SELECT Gender</option>
+						<option>MALE</option>
+						<option>FEMALE</option>
+					</select>
+
+				</td>
+			</tr>
+			<tr>
+				<td>MOBILE</td>
+				<td> <input type="text" name="salesman[mobile]" value="<?php echo $salesman->mobile ?>">  </td>
+			</tr>
+			<tr>
+				<td>STATUS</td>
+				<td>
+					<select name="salesman[status]">
+						<?php foreach ($salesman->getResource()->getStatusOptions() as $key => $value):?>
+						<?php $selected = ($key == $salesman->getstatus()) ? 'selected' : '';?>
+						<option value="<?php echo $key ?>"<?php echo $selected; ?>><?php echo $value;?></option>
+						<?php endforeach;?>
+					</select>
+
+				</td>
+			</tr>
+			
+			<tr>
+				<td>COMPANY</td>
+				<td> <input type="text" name="salesman[company]" value="<?php echo $salesman->company ?>">  </td>
+			</tr>
+			<tr>
+				<th> <button> <a href="index.php?c=salesman&a=grid">CANCEL</a> </button></th>
+				<th> <button type="submit"> SAVE </button></th>
+			</tr>
+		</table>
+
+		<table class="table table-striped">
+		<tr>
+			<th>Salesman Address</th>
+		</tr>
+	</table>
+		<table class="table table-striped">
+			<tr>
+				<td>ADDRESS</td>
+				<td> <input type="text" name="address[address]" value="<?php echo $salesmanAddress->address ?>">  </td>
+			</tr>
+			<tr>
+				<td>CITY</td>
+				<td> <input type="text" name="address[city]" value="<?php echo $salesmanAddress->city ?>">  </td>
+			</tr>
+			<tr>
+				<td>STATE</td>
+				<td> <input type="text" name="address[state]" value="<?php echo $salesmanAddress->state ?>">  </td>
+			</tr>
+			<tr>
+				<td>COMPANY</td>
+				<td> <input type="text" name="address[country]" value="<?php echo $salesmanAddress->country ?>">  </td>
+			</tr>
+			<tr>
+				<td>ZIP CODE</td>
+				<td> <input type="text" name="address[zip_code]" value="<?php echo $salesmanAddress->zip_code ?>">  </td>
+			</tr>
+
+
+				
+		</table>
+
+
+	</form>
+
+</body>
+</html>
