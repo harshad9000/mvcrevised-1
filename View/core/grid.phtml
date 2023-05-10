@@ -1,0 +1,54 @@
+<?php
+
+$rows = $this->getCollection();
+
+?>
+	<?php require_once 'View/html/header.phtml';?>
+	<div class="title9">
+		<div class="main9">
+			<?php echo $this->getTitle();?>
+		</div>
+		<div class="main99">
+			<?php foreach ($this->getButtons() as $key => $button): ?>
+			<a type="button" class="btn btn-primary" href="<?php echo $button['url'];?>"><?php echo $button['title']?></a>
+			<?php endforeach;?>
+		</div>
+	</div>
+	<table class="table table-success table-striped">
+		<tr>
+			<?php foreach ($this->getColumns() as $key => $column): ?>
+			<td><?php echo $column['title'];?></td>
+			<?php endforeach;?>
+			<?php foreach ($this->getActions() as $key => $action): ?>
+			<td><?php echo $action['title'];?></td>
+			<?php endforeach;?>
+		</tr>
+		<?php if (!$rows):?>
+		<tr>
+			<td>No records available.</td>
+		</tr>
+		<?php else:?>
+		 <?php foreach ($rows as $row): ?>
+		 	<tr>
+			<?php foreach ($this->getColumns() as $key => $column): ?>
+		 		<td> <?php echo $this->getColumnValue($row,$key); ?></td>
+			<?php endforeach;?>
+			<?php foreach ($this->getActions() as $key => $action): ?>
+		 		<td><a href="<?php $method = $action['method']; echo $this->$method($row,$key);?>"><?php echo $action['title']?></td>
+			<?php endforeach;?>
+		 		</tr>
+			
+		<?php endforeach ?>
+		<?php endif;?>
+
+<nav aria-label="Page navigation example">
+	<ul class="pagination">
+		<button  class="btn btn-outline-dark" onclick="<?php echo $this->getUrl('grid',null,['p' => $this->getPager()->start]) ?>">START</a></button>
+		<button  class="btn btn-outline-dark" onclick="<?php echo $this->getUrl('grid',null,['p' => $this->getPager()->previous]) ?>">PREVIOUS</a></button>
+		<button  class="btn btn-outline-dark" onclick="<?php echo $this->getUrl('grid',null,['p' => $this->getPager()->currentPage]) ?>">CURRENT</a></button>
+		<button  class="btn btn-outline-dark" onclick="<?php echo $this->getUrl('grid',null,['p' => $this->getPager()->next]) ?>">NEXT</a></button>
+		<button  class="btn btn-outline-dark" onclick="<?php echo $this->getUrl('grid',null,['p' => $this->getPager()->end]) ?>">END</a></button>
+	</ul>
+</nav>
+
+	</table>

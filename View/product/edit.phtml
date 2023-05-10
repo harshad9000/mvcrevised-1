@@ -1,0 +1,70 @@
+<?php
+$product = $this->product;
+?>
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADD</title>
+</head>
+<body>
+
+	<table class="table table-success table-striped-columns">
+		<tr>
+			<th>Product Edit</th>
+		</tr>
+	</table>
+	<form action="index.php?c=product&a=save&id=<?php echo $product->product_id; ?>" method="POST">
+		<table class="table table-success table-striped-columns">
+			<tr>
+				<td>PRODUCT NAME</td>
+				<td> <input type="text" name="product[name]" value="<?php echo $product->name ?>">  </td>
+			</tr>
+			<tr>
+				<td>COST</td>
+				<td> <input type="text" name="product[cost]" value="<?php echo $product->cost ?>">  </td>
+			</tr>
+			<tr>
+				<td>PRICE</td>
+				<td> <input type="text" name="product[price]" value="<?php echo $product->price ?>">  </td>
+			</tr>
+			<tr>
+				<td>SKU</td>
+				<td> <input type="text" name="product[SKU]" value="<?php echo $product->SKU ?>">  </td>
+			</tr>
+			<tr>
+				<td>STATUS</td>
+				<td>
+					<select name="product[status]">
+						<?php foreach ($product->getResource()->getStatusOptions() as $key => $value):?>
+						<?php $selected = ($key == $product->getstatus()) ? 'selected' : '';?>
+						<option value="<?php echo $key ?>"<?php echo $selected; ?>><?php echo $value;?></option>
+						<?php endforeach;?>
+					</select>
+
+				</td>
+			</tr>
+			
+			<tr>
+				<td>DISCRIPTION</td>
+				<td> <input type="text" name="product[description]" value="<?php echo $product->description ?>">  </td>
+			</tr>
+			<tr>
+				<td>COLOR</td>
+				<td> <input type="text" name="product[color]" value="<?php echo $product->color ?>">  </td>
+			</tr>
+			<tr>
+				<td>MATERIAL</td>
+				<td> <input type="text" name="product[material]" value="<?php echo $product->material ?>">  </td>
+			</tr>
+			<tr>
+				<th> <button> <a href="index.php?c=product&a=grid">CANCEL</a> </button></th>
+				<th> <button type="submit"> SAVE </button></th>
+			</tr>
+		</table>
+	</form>
+
+</body>
+</html>

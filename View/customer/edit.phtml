@@ -1,0 +1,130 @@
+<?php
+$customer = $this->customer;
+$billingAddress = $this->billingAddress;
+$shippingAddress = $this->shippingAddress;
+?>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADD</title>
+</head>
+<body>
+
+	<table class="table table-success table-striped-columns">
+		<tr>
+			<th>Customer Edit</th>
+		</tr>
+	</table>
+	<form action="index.php?c=customer&a=save&id=<?php echo $customer->customer_id ?>" method="POST">
+		<table class="table table-success table-striped-columns">
+			<tr>
+				<td>FIRST NAME</td>
+				<td> <input type="text" name="customer[first_name]" value="<?php echo $customer->first_name ?>">  </td>
+			</tr>
+			<tr>
+				<td>LAST NAME</td>
+				<td> <input type="text" name="customer[last_name]" value="<?php echo $customer->last_name ?>">  </td>
+			</tr>
+			<tr>
+				<td>EMAIL</td>
+				<td> <input type="text" name="customer[email]" value="<?php echo $customer->email ?>">  </td>
+			</tr>
+			<tr>
+				<td>GENDER</td>
+				<td>
+					<select name="customer[gender]" value="<?php echo $customer->gender ?>"> 
+						<option>SELECT Gender</option>
+						<option>MALE</option>
+						<option>FEMALE</option>
+					</select>
+
+				</td>
+			</tr>
+			<tr>
+				<td>MOBILE</td>
+				<td> <input type="text" name="customer[mobile]" value="<?php echo $customer->mobile ?>">  </td>
+			</tr>
+			<tr>
+				<td>STATUS</td>
+				<td>
+					<select name="customer[status]">
+						<?php foreach ($customer->getResource()->getStatusOptions() as $key => $value):?>
+						<?php $selected = ($key == $customer->getstatus()) ? 'selected' : '';?>
+						<option value="<?php echo $key ?>"<?php echo $selected; ?>><?php echo $value;?></option>
+						<?php endforeach;?>
+					</select>
+
+				</td>
+			</tr>
+			<tr>
+				<th> <button> <a href="index.php?c=customer&a=grid">CANCEL</a> </button></th>
+				<th> <button type="submit"> SAVE </button></th>
+			</tr>
+		</table>
+
+		<table class="table table-striped">
+		<tr>
+			<th>customer Address</th>
+		</tr>
+	</table>
+		<table class="table table-striped">
+			<tr>
+				<td>ADDRESS</td>
+				<td> <input type="text" name="billingAddress[address]" value="<?php echo $billingAddress->address ?>">  </td>
+			</tr>
+			<tr>
+				<td>CITY</td>
+				<td> <input type="text" name="billingAddress[city]" value="<?php echo $billingAddress->city ?>">  </td>
+			</tr>
+			<tr>
+				<td>STATE</td>
+				<td> <input type="text" name="billingAddress[state]" value="<?php echo $billingAddress->state ?>">  </td>
+			</tr>
+			<tr>
+				<td>COMPANY</td>
+				<td> <input type="text" name="billingAddress[country]" value="<?php echo $billingAddress->country ?>">  </td>
+			</tr>
+			<tr>
+				<td>ZIP CODE</td>
+				<td> <input type="text" name="billingAddress[zip_code]" value="<?php echo $billingAddress->zip_code ?>">  </td>
+			</tr>
+
+
+				
+		</table>
+
+		<table class="table table-striped">
+			<tr>
+				<td>ADDRESS</td>
+				<td> <input type="text" name="shippingAddress[address]" value="<?php echo $shippingAddress->address ?>">  </td>
+			</tr>
+			<tr>
+				<td>CITY</td>
+				<td> <input type="text" name="shippingAddress[city]" value="<?php echo $shippingAddress->city ?>">  </td>
+			</tr>
+			<tr>
+				<td>STATE</td>
+				<td> <input type="text" name="shippingAddress[state]" value="<?php echo $shippingAddress->state ?>">  </td>
+			</tr>
+			<tr>
+				<td>COMPANY</td>
+				<td> <input type="text" name="shippingAddress[country]" value="<?php echo $shippingAddress->country ?>">  </td>
+			</tr>
+			<tr>
+				<td>ZIP CODE</td>
+				<td> <input type="text" name="shippingAddress[zip_code]" value="<?php echo $shippingAddress->zip_code ?>">  </td>
+			</tr>
+
+
+				
+		</table>
+
+
+	</form>
+
+</body>
+</html>
