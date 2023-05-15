@@ -1,0 +1,56 @@
+<?php $rows = $this->getCollection(); ?>
+<?php require_once 'View/html/header.phtml';?>
+<div class="title9">
+	<div>
+		<?php echo $this->getTitle();?>
+	</div>
+	<div>
+		<?php foreach ($this->getButtons() as $key => $button): ?>
+		<a type="button" class="btn btn-primary" href="<?php echo $button['url'];?>"><?php echo $button['title']?></a>
+		<?php endforeach;?>
+	</div>
+</div>
+<table class="table table-success table-striped-columns">
+	<tr>
+		<?php foreach ($this->getColumns() as $key => $column): ?>
+		<td><?php echo $column['title'];?></td>
+		<?php endforeach;?>
+		<?php foreach ($this->getActions() as $key => $action): ?>
+		<td><?php echo $action['title'];?></td>
+		<?php endforeach;?>
+	</tr>
+	<?php if (!$rows):?>
+	<tr>
+		<td>No records available.</td>
+	</tr>
+	<?php else:?>
+	<?php foreach ($rows as $row): ?>
+	 <tr>
+		<?php foreach ($this->getColumns() as $key => $column): ?>
+	 	<td> <?php echo $this->getColumnValue($row,$key); ?></td>
+		<?php endforeach;?>
+		<?php foreach ($this->getActions() as $key => $action): ?>
+	 	<td><a class="btn btn-dark" href="<?php $method = $action['method']; echo $this->$method($row,$key);?>"><?php echo $action['title']?></td>
+		<?php endforeach;?>
+	 </tr>
+	<?php endforeach ?>
+	<?php endif;?>
+
+<nav aria-label="Page navigation example">
+	<ul class="pagination">
+		<li class="page-item"><a class="page-link" <?php if ($this->getPager()->getStart() == 0) {
+			echo "style='pointer-events:none'"; }?>
+		 	href="<?php echo $this->getUrl('grid',null,['p' => $this->getPager()->getStart()]) ?>">Start</a></li>
+		<li class="page-item"><a class="page-link" <?php if ($this->getPager()->getPrevious() == 0) {
+      		echo "style='pointer-events:none'"; } ?> 
+      		href="<?php echo $this->getUrl('grid',null,['p' => $this->getPager()->getprevious()]) ?>">Previous</a></li>
+		<li class="page-item"><a class="page-link" href="<?php echo $this->getUrl('grid',null,['p' => $this->getPager()->getcurrentPage()]) ?>"><?php echo $this->getPager()->getCurrentPage() ?></a></li>
+		<li class="page-item"><a class="page-link" <?php if ($this->getPager()->getNext() == 0) {
+      		echo "style='pointer-events:none'"; } ?>
+       		href="<?php echo $this->getUrl('grid',null,['p' => $this->getPager()->getnext()]) ?>">Next</a></li>
+		<li class="page-item"><a class="page-link" <?php if ($this->getPager()->getEnd() == 0) {
+      		echo "style='pointer-events:none'"; } ?>
+       		href="<?php echo $this->getUrl('grid',null,['p' => $this->getPager()->getend()]) ?>">end</a></li>
+	</ul>
+</nav>
+</table>

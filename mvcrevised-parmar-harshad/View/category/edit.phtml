@@ -1,0 +1,46 @@
+<?php
+$category = $this->category;
+?>
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADD</title>
+</head>
+<body>
+
+	<table class="table table-success table-striped">
+		<tr>
+			<th>Category Edit</th>
+		</tr>
+	</table>
+	<form action="index.php?c=category&a=save&id=<?php echo $category->category_id; ?>" method="POST">
+		<table class="table table-success table-striped">
+			<tr>
+				<td>CATEGORY NAME</td>
+				<td> <input type="text" name="category[name]" value="<?php echo $category->name ?>">  </td>
+			</tr>
+
+			<tr>
+				<td>STATUS</td>
+				<td>
+					<select name="category[status]">
+						<?php foreach ($category->getResource()->getStatusOptions() as $key => $value):?>
+						<?php $selected = ($key == $category->getstatus()) ? 'selected' : '';?>
+						<option value="<?php echo $key ?>"<?php echo $selected; ?>><?php echo $value;?></option>
+						<?php endforeach;?>
+					</select>
+
+				</td>
+			</tr>
+			<tr>
+				<th> <button> <a href="index.php?c=category&a=grid">CANCEL</a> </button></th>
+				<th> <button type="submit"> SAVE </button></th>
+			</tr>
+		</table>
+	</form>
+
+</body>
+</html>

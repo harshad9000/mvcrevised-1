@@ -1,0 +1,21 @@
+<div>
+	<?php
+		$messageModel = new Model_Core_Message();
+		$messages = $messageModel->getMessages();
+
+		if ($messages) {
+			foreach ($messages as $type => $message) {
+				if ($type == 'success') {
+					?><p class="<?php echo $type?> alert alert-success" role="alert"><?php echo $message?></p><?php
+				}
+				elseif ($type == 'failure') {
+					?><p class="<?php echo $type?> alert alert-danger" role="alert"><?php echo $message?></p><?php
+				}
+				else{
+				?><p class="<?php echo $type?> alert alert-warning" role="alert"><?php echo $message?></p><?php
+				}
+			}
+		}
+		$messageModel->clearMessages();
+	?>
+</div>
